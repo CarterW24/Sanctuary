@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Sanctuary.Game.Resources.Definitions.Combat;
 
@@ -20,12 +20,12 @@ public sealed class JobKitEnergyDefinition
 
 public sealed class JobKitTraitDefinition
 {
-    public int PrecisionLevel { get; set; } = 5;
-    public float PrecisionDamageBonus { get; set; }
+    public int DamageBonusLevel { get; set; } = 5;
+    public float DamageBonus { get; set; }
     public int BaseCritChancePercent { get; set; } = 10;
-    public int PrecisionCritChanceBonus { get; set; }
-    public int MarksmanshipLevel { get; set; } = 10;
-    public float MarksmanshipCritBonus { get; set; }
+    public int CritChanceBonus { get; set; }
+    public int CritMultiplierLevel { get; set; } = 10;
+    public float CritMultiplierBonus { get; set; }
     public float BaseCritMultiplier { get; set; } = 1.5f;
 }
 

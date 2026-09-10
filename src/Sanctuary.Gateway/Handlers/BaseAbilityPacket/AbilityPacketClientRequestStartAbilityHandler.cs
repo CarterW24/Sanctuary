@@ -3,7 +3,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using Sanctuary.Game;
 using Sanctuary.Packet;
 using Sanctuary.Packet.Common.Attributes;
 
@@ -13,14 +12,11 @@ namespace Sanctuary.Gateway.Handlers;
 public static class AbilityPacketClientRequestStartAbilityHandler
 {
     private static ILogger _logger = null!;
-    private static ICombatManager _combatManager = null!;
 
     public static void ConfigureServices(IServiceProvider serviceProvider)
     {
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         _logger = loggerFactory.CreateLogger(nameof(AbilityPacketClientRequestStartAbilityHandler));
-
-        _combatManager = serviceProvider.GetRequiredService<ICombatManager>();
     }
 
     public static bool HandlePacket(GatewayConnection connection, ReadOnlySpan<byte> data)
@@ -33,7 +29,7 @@ public static class AbilityPacketClientRequestStartAbilityHandler
 
         _logger.LogTrace("Received {name} packet. ( {packet} )", nameof(AbilityPacketClientRequestStartAbility), packet);
 
-        if (_combatManager.TryExecuteAbility(connection.Player, packet))
+        if (connection.Player.TryExecuteAbility(packet))
             return true;
 
         var abilityPacketFailed = new AbilityPacketFailed

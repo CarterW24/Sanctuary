@@ -101,7 +101,6 @@ builder.ConfigureServices((hostBuilderContext, serviceCollection) =>
     serviceCollection.AddSingleton<IInteractionManager, InteractionManager>();
     serviceCollection.AddSingleton<IChatCommandManager, ChatCommandManager>();
     serviceCollection.AddSingleton<IRewardManager, RewardManager>();
-    serviceCollection.AddSingleton<ICombatManager, CombatManager>();
 });
 
 builder.ConfigureLogging((hostBuilderContext, loggingBuilder) =>

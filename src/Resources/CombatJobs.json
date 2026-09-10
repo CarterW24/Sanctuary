@@ -9,12 +9,12 @@
     "BasicRecastMs": 600,
     "FallbackBasicAbilityId": 1001,
     "Traits": {
-      "PrecisionLevel": 5,
-      "PrecisionDamageBonus": 0.05,
+      "DamageBonusLevel": 5,
+      "DamageBonus": 0.05,
       "BaseCritChancePercent": 10,
-      "PrecisionCritChanceBonus": 5,
-      "MarksmanshipLevel": 10,
-      "MarksmanshipCritBonus": 0,
+      "CritChanceBonus": 5,
+      "CritMultiplierLevel": 10,
+      "CritMultiplierBonus": 0,
       "BaseCritMultiplier": 1.5
     },
     "Energy": {
@@ -1333,12 +1333,12 @@
     "BasicRecastMs": 600,
     "FallbackBasicAbilityId": 2010,
     "Traits": {
-      "PrecisionLevel": 5,
-      "PrecisionDamageBonus": 0,
+      "DamageBonusLevel": 5,
+      "DamageBonus": 0,
       "BaseCritChancePercent": 10,
-      "PrecisionCritChanceBonus": 0,
-      "MarksmanshipLevel": 10,
-      "MarksmanshipCritBonus": 0,
+      "CritChanceBonus": 0,
+      "CritMultiplierLevel": 10,
+      "CritMultiplierBonus": 0,
       "BaseCritMultiplier": 1.5
     },
     "Energy": {
@@ -2856,12 +2856,12 @@
     "BasicRecastMs": 600,
     "FallbackBasicAbilityId": 3010,
     "Traits": {
-      "PrecisionLevel": 5,
-      "PrecisionDamageBonus": 0,
+      "DamageBonusLevel": 5,
+      "DamageBonus": 0,
       "BaseCritChancePercent": 10,
-      "PrecisionCritChanceBonus": 0,
-      "MarksmanshipLevel": 10,
-      "MarksmanshipCritBonus": 0,
+      "CritChanceBonus": 0,
+      "CritMultiplierLevel": 10,
+      "CritMultiplierBonus": 0,
       "BaseCritMultiplier": 1.5
     },
     "Energy": {
@@ -4242,12 +4242,12 @@
     "BasicRecastMs": 600,
     "FallbackBasicAbilityId": 4010,
     "Traits": {
-      "PrecisionLevel": 5,
-      "PrecisionDamageBonus": 0,
+      "DamageBonusLevel": 5,
+      "DamageBonus": 0,
       "BaseCritChancePercent": 10,
-      "PrecisionCritChanceBonus": 0,
-      "MarksmanshipLevel": 10,
-      "MarksmanshipCritBonus": 0,
+      "CritChanceBonus": 0,
+      "CritMultiplierLevel": 10,
+      "CritMultiplierBonus": 0,
       "BaseCritMultiplier": 1.5
     },
     "Energy": {
@@ -5547,12 +5547,12 @@
     "BasicRecastMs": 600,
     "FallbackBasicAbilityId": 5010,
     "Traits": {
-      "PrecisionLevel": 5,
-      "PrecisionDamageBonus": 0,
+      "DamageBonusLevel": 5,
+      "DamageBonus": 0,
       "BaseCritChancePercent": 10,
-      "PrecisionCritChanceBonus": 0,
-      "MarksmanshipLevel": 10,
-      "MarksmanshipCritBonus": 0,
+      "CritChanceBonus": 0,
+      "CritMultiplierLevel": 10,
+      "CritMultiplierBonus": 0,
       "BaseCritMultiplier": 1.5
     },
     "Energy": {
@@ -7009,12 +7009,12 @@
     "BasicRecastMs": 600,
     "FallbackBasicAbilityId": 6010,
     "Traits": {
-      "PrecisionLevel": 5,
-      "PrecisionDamageBonus": 0,
+      "DamageBonusLevel": 5,
+      "DamageBonus": 0,
       "BaseCritChancePercent": 10,
-      "PrecisionCritChanceBonus": 0,
-      "MarksmanshipLevel": 10,
-      "MarksmanshipCritBonus": 0,
+      "CritChanceBonus": 0,
+      "CritMultiplierLevel": 10,
+      "CritMultiplierBonus": 0,
       "BaseCritMultiplier": 1.5
     },
     "Energy": {

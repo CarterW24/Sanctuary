@@ -16,7 +16,6 @@ public static class CommandPacketSetProfileHandler
 {
     private static ILogger _logger = null!;
     private static IZoneManager _zoneManager = null!;
-    private static ICombatManager _combatManager = null!;
 
     public static void ConfigureServices(IServiceProvider serviceProvider)
     {
@@ -24,7 +23,6 @@ public static class CommandPacketSetProfileHandler
         _logger = loggerFactory.CreateLogger(nameof(CommandPacketSetProfileHandler));
 
         _zoneManager = serviceProvider.GetRequiredService<IZoneManager>();
-        _combatManager = serviceProvider.GetRequiredService<ICombatManager>();
     }
 
     public static bool HandlePacket(GatewayConnection connection, ReadOnlySpan<byte> data)
@@ -67,7 +65,7 @@ public static class CommandPacketSetProfileHandler
 
         connection.Player.SendTunneledToVisible(playerUpdatePacketEquippedItemsChange);
 
-        _combatManager.SendToolbar(connection.Player);
+        connection.Player.SendToolbar();
 
         const int PrimaryWeaponSlot = 7;
 
@@ -88,6 +86,12 @@ public static class CommandPacketSetProfileHandler
                 connection.Player.SendTunneledToVisible(playerUpdatePacketEquipItemChange, sendToSelf: true);
             }
         }
+
+        connection.Player.SendTunneledToVisible(new PlayerUpdatePacketUpdateActiveWieldType
+        {
+            Guid = connection.Player.Guid,
+            WieldType = connection.Player.ResolveWieldType()
+        }, sendToSelf: true);
 
         var friendStatusPacket = new FriendStatusPacket
         {
