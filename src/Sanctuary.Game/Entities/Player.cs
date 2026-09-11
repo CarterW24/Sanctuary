@@ -176,25 +176,27 @@ public sealed class Player : ClientPcData, IEntity
             return false;
         }
 
-        var weaponDefinitionId = GetEquippedWeaponDefinitionId();
-        var (basic, special) = ResolveWeaponAbilities(kit, weaponDefinitionId);
-
-        var weaponNameId = 0;
-        if (_resourceManager.ClientItemDefinitions.TryGetValue(weaponDefinitionId, out var weaponDefinition))
-            weaponNameId = weaponDefinition.NameId;
-
         var setDefinition = new AbilityPacketSetDefinition { ProfileId = kit.ProfileId };
 
-        if (basic is not null)
-        {
-            setDefinition.AbilitySet.Abilities[0] = CreateToolbarSlot(kit.BasicSlotDefId, basic.IconId, weaponNameId, manaCost: 0);
-            SendAbilityDefinition(kit.BasicSlotDefId, basic);
-        }
+        var weaponDefinitionId = GetEquippedWeaponDefinitionId();
 
-        if (special is not null)
+        if (_resourceManager.ClientItemDefinitions.TryGetValue(weaponDefinitionId, out var weaponDefinition))
         {
-            setDefinition.AbilitySet.Abilities[1] = CreateToolbarSlot(kit.SpecialSlotDefId, special.IconId, weaponNameId, special.EnergyCost);
-            SendAbilityDefinition(kit.SpecialSlotDefId, special);
+            var (basic, special) = ResolveWeaponAbilities(kit, weaponDefinitionId);
+
+            if (basic is not null)
+            {
+                setDefinition.AbilitySet.Abilities[0] = CreateToolbarSlot(kit.BasicSlotDefId, basic.IconId, weaponDefinition.NameId, manaCost: 0);
+                SendAbilityDefinition(kit.BasicSlotDefId, basic);
+            }
+
+            if (special is not null)
+            {
+                setDefinition.AbilitySet.Abilities[1] = CreateToolbarSlot(kit.SpecialSlotDefId, special.IconId, weaponDefinition.NameId, special.EnergyCost);
+                SendAbilityDefinition(kit.SpecialSlotDefId, special);
+            }
+
+            PreloadAbilityEffects(basic, special);
         }
 
         SendTunneled(setDefinition);
@@ -202,8 +204,6 @@ public sealed class Player : ClientPcData, IEntity
         MaxEnergy = kit.Energy.Max;
         // Resync energy against the new max.
         Energy = _energy;
-
-        PreloadAbilityEffects(basic, special);
 
         return true;
     }
@@ -466,9 +466,7 @@ public sealed class Player : ClientPcData, IEntity
 
     private (AbilityDefinition? Basic, AbilityDefinition? Special) ResolveWeaponAbilities(JobKitDefinition kit, int weaponDefinitionId)
     {
-        var mapping = weaponDefinitionId != 0
-            ? kit.Weapons.FirstOrDefault(w => w.WeaponDefIds.Contains(weaponDefinitionId))
-            : null;
+        var mapping = kit.Weapons.FirstOrDefault(w => w.WeaponDefIds.Contains(weaponDefinitionId));
 
         var basicId = mapping?.BasicAbilityId ?? kit.FallbackBasicAbilityId;
         var specialId = mapping?.SpecialAbilityId ?? 0;
